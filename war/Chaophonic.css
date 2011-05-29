@@ -1,0 +1,89 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+
+.truc {
+	background-color: red;
+}
+
+
+.ap {
+	background-color: blue;
+}
+
+.ap2 {
+	background-color: green;
+}
+	
+.sequencer {
+	background-color: #cccccc;
+}
+
+.sample {
+  background-color: blue;
+}
+
+.soundSamplePanel {
+	background-color: green;		
+}
+
+#soundmanager-debug {
+	 background:blue;
+	}
+
+#soundmanager-debug {
+ position:fixed;
+ _position:absolute; /* IE <7 */
+ bottom:1em;
+ right:1em;
+ width:40em;
+ height:30em;
+ overflow:auto;
+ border:1px solid #ccc;
+ padding:1em;
+ margin:1em;
+ font-family:monaco,"VT-100",terminal,"lucida console",courier,system;
+ font-size:x-small;
+ background:#f6f6f6;
+ opacity:0.9;
+ color:#333;
+}
+#soundmanager-debug code {
+ font-size:1.1em;
+ *font-size:1em;
+}
+#soundmanager-debug div {
+ margin-top:0.5em;
+}

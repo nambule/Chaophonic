@@ -1,0 +1,2 @@
+serviceClass: com.cedg.chaophonic.client.GreetingService
+path: CAA41E67689BC0DE958308FD9D15493C.gwt.rpc
