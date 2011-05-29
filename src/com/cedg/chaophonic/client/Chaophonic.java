@@ -1,35 +1,14 @@
 package com.cedg.chaophonic.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.allen_sauer.gwt.dnd.client.DragContext;
-import com.allen_sauer.gwt.dnd.client.PickupDragController;
 import com.allen_sauer.gwt.dnd.client.drop.GridConstrainedDropController;
-import com.allen_sauer.gwt.dnd.client.drop.IndexedDropController;
-import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
-import com.cedg.chaophonic.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -81,30 +60,30 @@ public class Chaophonic implements EntryPoint {
 		dragController2.registerDropController(gcdc);
 		
 		// Init des samples dans le sample browser
-		final Soundsample sd = new Soundsample("sd","sounds/SD.mp3"); 
+		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3"); 
 		sd.loadSample();
-		final Soundsample bd = new Soundsample("bd","sounds/BD.mp3");
+		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3");
 		bd.loadSample();
-		final Soundsample hh = new Soundsample("hh","sounds/HH.mp3");
+		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3");
 		hh.loadSample();
 
 		// Séquençage des samples pour le séquenceur
-		final Soundsample bd1 = bd.getCopyOf();
-		final Soundsample bd2 = bd.getCopyOf();
-		final Soundsample bd3 = bd.getCopyOf();
-		final Soundsample bd4 = bd.getCopyOf();
+		final AudioSample bd1 = bd.getCopyOf();
+		final AudioSample bd2 = bd.getCopyOf();
+		final AudioSample bd3 = bd.getCopyOf();
+		final AudioSample bd4 = bd.getCopyOf();
 		
-		final Soundsample hh1 = hh.getCopyOf();
-		final Soundsample hh2 = hh.getCopyOf();
-		final Soundsample hh3 = hh.getCopyOf();
-		final Soundsample hh4 = hh.getCopyOf();
-		final Soundsample hh5 = hh.getCopyOf();
-		final Soundsample hh6 = hh.getCopyOf();
+		final AudioSample hh1 = hh.getCopyOf();
+		final AudioSample hh2 = hh.getCopyOf();
+		final AudioSample hh3 = hh.getCopyOf();
+		final AudioSample hh4 = hh.getCopyOf();
+		final AudioSample hh5 = hh.getCopyOf();
+		final AudioSample hh6 = hh.getCopyOf();
 		
-		final Soundsample sd1 = sd.getCopyOf();
-		final Soundsample sd2 = sd.getCopyOf();
-		final Soundsample sd3 = sd.getCopyOf();
-		final Soundsample sd4 = sd.getCopyOf();
+		final AudioSample sd1 = sd.getCopyOf();
+		final AudioSample sd2 = sd.getCopyOf();
+		final AudioSample sd3 = sd.getCopyOf();
+		final AudioSample sd4 = sd.getCopyOf();
 		
 		song.addSoundsample(bd1);
 		song.addSoundsample(bd2);

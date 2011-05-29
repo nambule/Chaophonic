@@ -16,17 +16,17 @@ import com.sun.j3d.audioengines.Sample;
  */
 public class Song{
 
-	public Map<Integer, Soundsample> soundArrayHM;
+	public Map<Integer, AudioSample> soundArrayHM;
 	private int lengthInMs;
 	private int signatureTop;
 	private int signatureBottom;
 	private int bpm;
 
-	public Map<Integer, Soundsample> getSoundArrayHM() {
+	public Map<Integer, AudioSample> getSoundArrayHM() {
 		return soundArrayHM;
 	}
 
-	public void setSoundArrayHM(Map<Integer, Soundsample> soundArrayHM) {
+	public void setSoundArrayHM(Map<Integer, AudioSample> soundArrayHM) {
 		this.soundArrayHM = soundArrayHM;
 	}
 
@@ -67,7 +67,7 @@ public class Song{
 		soundArrayHM.clear();
 	}
 
-	public void addSoundsample(Soundsample s){
+	public void addSoundsample(AudioSample s){
 		//soundArray.add(s);
 		soundArrayHM.put(s.getId(), s);
 	}
@@ -88,8 +88,8 @@ public class Song{
 		
 		System.out.println(this.toString());
 
-		for (Iterator<Soundsample> iterator = soundArrayHM.values().iterator() ; iterator.hasNext() ;){
-		    Soundsample s = iterator.next();
+		for (Iterator<AudioSample> iterator = soundArrayHM.values().iterator() ; iterator.hasNext() ;){
+		    AudioSample s = iterator.next();
 		    if (s.getStarttime()!=0){
 			    s.initTimer();
 			    s.getTimer().schedule(s.getStarttime());	    
@@ -112,7 +112,7 @@ public class Song{
 	public Song() {
 		super();
 		// TODO Auto-generated constructor stub
-		soundArrayHM = new HashMap<Integer, Soundsample>();
+		soundArrayHM = new HashMap<Integer, AudioSample>();
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class Song{
 //		return getSoundArrayHM().get(index);
 //	}
 
-	public Soundsample getSoundSampleById(int i){
+	public AudioSample getSoundSampleById(int i){
 		// TODO is the name correct ??!
 		return soundArrayHM.get(i);
 	}

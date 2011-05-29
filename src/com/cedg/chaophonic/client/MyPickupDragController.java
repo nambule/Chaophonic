@@ -40,8 +40,8 @@ public class MyPickupDragController extends PickupDragController{
 			//Soundsample s = song.getSoundSampleByIndex(Integer.parseInt(w.getElement().getTitle()));
 			//s.setStarttime((w.getAbsoluteLeft())*10);
 			System.out.println("dragEnd "+song.toString());
-			Soundsample s = song.getSoundSampleById(Integer.parseInt(w.getElement().getTitle()));
-			s.setStarttime((w.getAbsoluteLeft())*10);
+			AudioSample s = song.getSoundSampleById(Integer.parseInt(w.getElement().getTitle()));
+			s.setStarttime(((w.getAbsoluteLeft())*10)+1);
 			System.out.println("from drag = " + s.toString());
 		}
 	}
