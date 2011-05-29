@@ -1,7 +1,8 @@
 HOW TO :
-1/ install eclipse
-2/ install GWT 2.2 plugin for eclipse
-3/ copy/paste src and war directory
-4/ add gwt-dnd to your classpath (http://code.google.com/p/gwt-dnd/)
-5/ launch in dev mode
+- install eclipse
+- install GWT 2.2 plugin for eclipse
+- create a new GWT project 
+- copy/paste src and war directory
+- add gwt-dnd to your classpath (http://code.google.com/p/gwt-dnd/)
+- launch in dev mode
 
