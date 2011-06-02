@@ -16,18 +16,20 @@ import com.sun.j3d.audioengines.Sample;
  */
 public class Song{
 
-	public Map<Integer, AudioSample> soundArrayHM;
+	private Browser browser;
+
+	public Map<Integer, AudioSampleSequenced> soundSequencedArrayHM;
 	private int lengthInMs;
 	private int signatureTop;
 	private int signatureBottom;
 	private int bpm;
 
-	public Map<Integer, AudioSample> getSoundArrayHM() {
-		return soundArrayHM;
+	public Map<Integer, AudioSampleSequenced> getSoundArrayHM() {
+		return soundSequencedArrayHM;
 	}
 
-	public void setSoundArrayHM(Map<Integer, AudioSample> soundArrayHM) {
-		this.soundArrayHM = soundArrayHM;
+	public void setSoundArrayHM(Map<Integer, AudioSampleSequenced> soundArrayHM) {
+		this.soundSequencedArrayHM = soundArrayHM;
 	}
 
 	public int getLengthInMs() {
@@ -62,20 +64,29 @@ public class Song{
 		this.bpm = bpm;
 	}
 
-	public void init(){
-		//soundArray.clear();
-		soundArrayHM.clear();
+	public Browser getBrowser() {
+		return browser;
 	}
 
-	public void addSoundsample(AudioSample s){
+	public void setBrowser(Browser browser) {
+		this.browser = browser;
+	}
+	
+	public void init(){
+		//soundArray.clear();
+		soundSequencedArrayHM.clear();
+	}
+
+	public void addSoundsample(AudioSampleSequenced s){
 		//soundArray.add(s);
-		soundArrayHM.put(s.getId(), s);
+		// TODO
+		soundSequencedArrayHM.put(1, s);
 	}
 
 	public String toString(){
 		String result = "\nsong hashmap->\n";
 		result += ("Retrieving all values from the HashMap\n");
-		Iterator iterator = soundArrayHM.entrySet().iterator();
+		Iterator iterator = soundSequencedArrayHM.entrySet().iterator();
 		while(iterator.hasNext()){        
 			result += (iterator.next().toString());
 		}
@@ -88,14 +99,22 @@ public class Song{
 		
 		System.out.println(this.toString());
 
-		for (Iterator<AudioSample> iterator = soundArrayHM.values().iterator() ; iterator.hasNext() ;){
-		    AudioSample s = iterator.next();
+		for (Iterator<AudioSampleSequenced> iterator = soundSequencedArrayHM.values().iterator() ; iterator.hasNext() ;){
+			AudioSampleSequenced s = iterator.next();
 		    if (s.getStarttime()!=0){
 			    s.initTimer();
 			    s.getTimer().schedule(s.getStarttime());	    
 		
 		    }    
 		}
+//		for (Iterator<AudioSample> iterator = soundArrayHM.values().iterator() ; iterator.hasNext() ;){
+//		    AudioSample s = iterator.next();
+//		    if (s.getStarttime()!=0){
+//			    s.initTimer();
+//			    s.getTimer().schedule(s.getStarttime());	    
+//		
+//		    }    
+//		}
 	}
 
 //	public void sequenceSample(Soundsample s, Integer startTime){
@@ -112,7 +131,8 @@ public class Song{
 	public Song() {
 		super();
 		// TODO Auto-generated constructor stub
-		soundArrayHM = new HashMap<Integer, AudioSample>();
+		soundSequencedArrayHM = new HashMap<Integer, AudioSampleSequenced>();
+		browser = new Browser();
 	}
 
 	/**
@@ -128,8 +148,9 @@ public class Song{
 //		return getSoundArrayHM().get(index);
 //	}
 
-	public AudioSample getSoundSampleById(int i){
+	public AudioSampleSequenced getAudioSampleSequencedById(int i){
 		// TODO is the name correct ??!
-		return soundArrayHM.get(i);
+		// TODO 
+		return soundSequencedArrayHM.get(1);
 	}
 }

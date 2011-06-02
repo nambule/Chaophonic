@@ -3,7 +3,10 @@ package com.cedg.chaophonic.client;
 import java.util.Iterator;
 
 import com.allen_sauer.gwt.dnd.client.PickupDragController;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -18,14 +21,19 @@ public class MyPickupDragController extends PickupDragController{
 	public MyPickupDragController(AbsolutePanel boundaryPanel,
 			boolean allowDroppingOnBoundaryPanel) {
 		super(boundaryPanel, allowDroppingOnBoundaryPanel);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public MyPickupDragController(AbsolutePanel boundaryPanel,
 			boolean allowDroppingOnBoundaryPanel, Song s) {
 		super(boundaryPanel, allowDroppingOnBoundaryPanel);
 		this.song=s;
-		// TODO Auto-generated constructor stub
+	}
+	
+	public void dragStart(){
+		super.dragStart();
+		for (Widget w : this.getSelectedWidgets()) {
+			System.out.println("dragstart="+w.getElement().getTitle());
+		}
 	}
 	
 	public void dragEnd(){
@@ -33,16 +41,30 @@ public class MyPickupDragController extends PickupDragController{
 		System.out.println("DragEnd");
 		for (Widget w : this.getSelectedWidgets()) {
 			System.out.println(w.getElement().toString());
+			System.out.println("classname="+w.getElement().getClassName());
+			System.out.println(w.getClass());
 			System.out.println(w.getAbsoluteLeft());	
-			System.out.println(w.getElement().getTitle());
-			//System.out.println(w.getParent().toString());		
-			// TODO 
-			//Soundsample s = song.getSoundSampleByIndex(Integer.parseInt(w.getElement().getTitle()));
-			//s.setStarttime((w.getAbsoluteLeft())*10);
-			System.out.println("dragEnd "+song.toString());
-			AudioSample s = song.getSoundSampleById(Integer.parseInt(w.getElement().getTitle()));
-			s.setStarttime(((w.getAbsoluteLeft())*10)+1);
-			System.out.println("from drag = " + s.toString());
+			System.out.println("title from dragend="+w.getElement().getTitle());
+			//System.out.println(w.getParent().toString());	
+			
+			String objectTitle = w.getElement().getTitle();
+			
+			// si c'est un AS alors on créé un ASS, sinon c'est un déplacement d'un ASS existant
+			if (w instanceof AudioSample){
+				// création d'un nouvel ASS
+				AudioSampleSequenced ass = new AudioSampleSequenced((AudioSample) w);
+				ass.setStarttime(((w.getAbsoluteLeft())*10)+1);
+				RootPanel.get().add(ass,w.getAbsoluteLeft(),w.getAbsoluteTop());
+				this.makeDraggable(ass);
+				song.getSoundArrayHM().put(ass.getId(), ass);
+				// back to original position
+				RootPanel.get().add(w,150,200);
+			} else if (w instanceof AudioSampleSequenced) {
+				// séquencage de l'ASS
+				((AudioSampleSequenced) w).setStarttime(((w.getAbsoluteLeft())*10)+1);
+			}
+			
+			System.out.println("display song:"+song.toString());
 		}
 	}
 

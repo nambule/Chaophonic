@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -42,7 +43,7 @@ public class Chaophonic implements EntryPoint {
 		
 		song = new Song();
 		song.readyToGo();
-
+		
 		// drop target
 		AbsolutePanel gridConstrainedDropTarget = new AbsolutePanel();
 		gridConstrainedDropTarget.setStyleName("sequencer");
@@ -52,7 +53,7 @@ public class Chaophonic implements EntryPoint {
 		RootPanel.get().add(lDropSample,0,370);
 		
 		// instantiate our drop controller
-		GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 40);
+		GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 20);
 
 		//Drag handler
 		MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
@@ -62,97 +63,52 @@ public class Chaophonic implements EntryPoint {
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3"); 
 		sd.loadSample();
-		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3");
-		bd.loadSample();
-		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3");
-		hh.loadSample();
+//		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3");
+//		bd.loadSample();
+//		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3");
+//		hh.loadSample();
 
+		
+		song.getBrowser().addSoundsample(sd);
+//		song.getBrowser().addSoundsample(bd);
+//		song.getBrowser().addSoundsample(hh);
+		
 		// Séquençage des samples pour le séquenceur
-		final AudioSample bd1 = bd.getCopyOf();
-		final AudioSample bd2 = bd.getCopyOf();
-		final AudioSample bd3 = bd.getCopyOf();
-		final AudioSample bd4 = bd.getCopyOf();
+//		final AudioSample bd1 = bd.getCopyOf();
 		
-		final AudioSample hh1 = hh.getCopyOf();
-		final AudioSample hh2 = hh.getCopyOf();
-		final AudioSample hh3 = hh.getCopyOf();
-		final AudioSample hh4 = hh.getCopyOf();
-		final AudioSample hh5 = hh.getCopyOf();
-		final AudioSample hh6 = hh.getCopyOf();
-		
-		final AudioSample sd1 = sd.getCopyOf();
-		final AudioSample sd2 = sd.getCopyOf();
-		final AudioSample sd3 = sd.getCopyOf();
-		final AudioSample sd4 = sd.getCopyOf();
-		
-		song.addSoundsample(bd1);
-		song.addSoundsample(bd2);
-		song.addSoundsample(bd3);
-		song.addSoundsample(bd4);
+//		song.addSoundsample(bd1);
 
-		song.addSoundsample(hh1);
-		song.addSoundsample(hh2);
-		song.addSoundsample(hh3);
-		song.addSoundsample(hh4);
-		song.addSoundsample(hh5);
-		song.addSoundsample(hh6);
-		
-		song.addSoundsample(sd1);
-		song.addSoundsample(sd2);
-		song.addSoundsample(sd3);
-		song.addSoundsample(sd4);
-
+		Label lBrowser = new Label("Browser");
 		Label lBD = new Label("BD");
 		Label lSD = new Label("SD");
 		Label lHH = new Label("HH");
 		
 		// Ajout des images
-		// TODO : change that
+		RootPanel.get().add(sd,100,200);
+		
+		RootPanel.get().add(lBrowser,0,30);
 		RootPanel.get().add(lBD,0,70);
-		RootPanel.get().add(bd1.getImg(), 40, 60);
-		RootPanel.get().add(bd2.getImg(), 80, 60);		
-		RootPanel.get().add(bd3.getImg(), 120, 60);
-		RootPanel.get().add(bd4.getImg(), 160, 60);
-				
-		RootPanel.get().add(lHH,0,190);
-		RootPanel.get().add(hh1.getImg(), 40, 180);		
-		RootPanel.get().add(hh2.getImg(), 80, 180);		
-		RootPanel.get().add(hh3.getImg(), 120, 180);
-		RootPanel.get().add(hh4.getImg(), 160, 180);		
-		RootPanel.get().add(hh5.getImg(), 200, 180);		
-		RootPanel.get().add(hh6.getImg(), 240, 180);
-
 		RootPanel.get().add(lSD,0,130);
-		RootPanel.get().add(sd1.getImg(), 40, 120);
-		RootPanel.get().add(sd2.getImg(), 80, 120);
-		RootPanel.get().add(sd3.getImg(), 120, 120);
-		RootPanel.get().add(sd4.getImg(), 160, 120);
+		RootPanel.get().add(lHH,0,190);
 
-		dragController2.makeDraggable(bd1.getImg());
-		dragController2.makeDraggable(bd2.getImg());
-		dragController2.makeDraggable(bd3.getImg());
-		dragController2.makeDraggable(bd4.getImg());
-		dragController2.makeDraggable(hh1.getImg());
-		dragController2.makeDraggable(hh2.getImg());
-		dragController2.makeDraggable(hh3.getImg());
-		dragController2.makeDraggable(hh4.getImg());
-		dragController2.makeDraggable(hh5.getImg());
-		dragController2.makeDraggable(hh6.getImg());
-		dragController2.makeDraggable(sd1.getImg());
-		dragController2.makeDraggable(sd2.getImg());
-		dragController2.makeDraggable(sd3.getImg());
-		dragController2.makeDraggable(sd4.getImg());
+//		RootPanel.get().add(bd.getImg(), 40, 60);
+	//	RootPanel.get().add(sd.getImg(), 40, 120);
+//		RootPanel.get().add(hh.getImg(), 40, 180);
+
+
+		dragController2.makeDraggable(sd);
+		
+//		dragController2.makeDraggable(bd.getImg());
+		//dragController2.makeDraggable(sd.getImg());
+//		dragController2.makeDraggable(hh.getImg());
 		
 		// Useless but might be a good example for a tête de lecture
 		// work with the customAnimation class
 		// CustomAnimation animation = new CustomAnimation(img.getElement());
 		// animation.scrollTo(100, 500, 2000);
-		
-		System.out.println(song.toString());
-
-		//song.playSong();
 
 		Button b2 = new Button("play !");
+		b2.setPixelSize(200, 40);
 		b2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -166,7 +122,7 @@ public class Chaophonic implements EntryPoint {
 		});
 
 		// Add it to the root panel.
-		RootPanel.get().add(b2,0,550);
+		RootPanel.get().add(b2,400,530);
 	}
 
 	// Useless but still a good example
