@@ -14,19 +14,19 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class Track extends GridConstrainedDropController {
 
-
 	  public Track(AbsolutePanel ap, int x, int y) {
 	    super(ap,x,y);
 	  }
+	  	  
 	  public void onDrop(DragContext context) {
 	    super.onDrop(context);
-	    System.out.println("dropped !!!");
-	    System.out.println("desiredX "+context.desiredDraggableX);
-	    System.out.println("desiredY "+context.desiredDraggableY);
-	    System.out.println("mouseX "+context.mouseX);
-	    System.out.println("mouseY "+context.mouseY);
-	    System.out.println(context.dragController.toString());
-	    System.out.println(context.draggable.toString());
+//	    System.out.println("dropped !!!");
+//	    System.out.println("desiredX "+context.desiredDraggableX);
+//	    System.out.println("desiredY "+context.desiredDraggableY);
+//	    System.out.println("mouseX "+context.mouseX);
+//	    System.out.println("mouseY "+context.mouseY);
+//	    System.out.println(context.dragController.toString());
+//	    System.out.println(context.draggable.toString());
 
 
 	  }

@@ -23,6 +23,16 @@ public class Song{
 	private int signatureTop;
 	private int signatureBottom;
 	private int bpm;
+	// TODO : width should not be here
+	private int width;
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
 
 	public Map<Integer, AudioSampleSequenced> getSoundArrayHM() {
 		return soundSequencedArrayHM;

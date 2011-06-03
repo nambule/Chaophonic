@@ -6,8 +6,10 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -38,20 +40,31 @@ public class Chaophonic implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		
+		int trackWidth = 600;
+		int songLengthInMs = 5000;
+		
 		// ensure the document BODY has dimensions in standards mode
 		RootPanel.get().setPixelSize(800, 600);   
 		
 		song = new Song();
+		song.setLengthInMs(songLengthInMs);
+		song.setWidth(trackWidth);
 		song.readyToGo();
 		
 		// drop target
 		AbsolutePanel gridConstrainedDropTarget = new AbsolutePanel();
 		gridConstrainedDropTarget.setStyleName("sequencer");
 		RootPanel.get().add(gridConstrainedDropTarget,0,400);
-		gridConstrainedDropTarget.setPixelSize(600, 120);
+		gridConstrainedDropTarget.setPixelSize(trackWidth, 120);
 		Label lDropSample = new Label("Drop your samples here :");
 		lDropSample.setStyleName("module_title");
 		RootPanel.get().add(lDropSample,0,370);
+		
+//		Panel p = new HorizontalPanel();
+//		p.setPixelSize(100, 10);
+//		p.setStyleName("sequencer_rule");
+//		RootPanel.get().add(p,200,200);
 		
 		// instantiate our drop controller
 		GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 20);
@@ -64,9 +77,9 @@ public class Chaophonic implements EntryPoint {
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
 		sd.loadSample();
-		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3","#01D0DF");
+		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3","#FE8800");
 		bd.loadSample();
-		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3","#01D439");
+		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3","#FEED00");
 		hh.loadSample();
 
 		// TODO : automate position
