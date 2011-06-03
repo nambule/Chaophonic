@@ -34,6 +34,9 @@ public class AudioSample extends HTML{
 	private String title;
 	private Image img;
 	private static int cpt_id_as = 0;
+	private int x_orig;
+	private int y_orig;
+	private String color;
 
 //	private int startTimeInMs = 0;
 //	private Timer timer;
@@ -41,6 +44,22 @@ public class AudioSample extends HTML{
 //	private static int cpt_id = 0;
 
 	
+	public int getX_orig() {
+		return x_orig;
+	}
+
+	public void setX_orig(int x_orig) {
+		this.x_orig = x_orig;
+	}
+
+	public int getY_orig() {
+		return y_orig;
+	}
+
+	public void setY_orig(int y_orig) {
+		this.y_orig = y_orig;
+	}
+
 	public Image getImg() {
 		return img;
 	}
@@ -108,7 +127,7 @@ public class AudioSample extends HTML{
 	public AudioSample() {
 	}
 
-	public AudioSample(String label, String filename) {
+	public AudioSample(String label, String filename, String color) {
 		super();
 		this.label = label;
 		this.filename = filename;
@@ -120,9 +139,10 @@ public class AudioSample extends HTML{
 		this.img = new Image("http://code.google.com/webtoolkit/logo-185x175.png");
 		this.img.setTitle("AS_"+cpt_id_as);
 		this.img.setPixelSize(40, 40);
+		this.color = color;
 		
 		//this.setElement(Document.get().createDivElement());
-		this.getElement().getStyle().setBackgroundColor("lightgray");
+		this.getElement().getStyle().setBackgroundColor(color);
 		this.getElement().getStyle().setBorderColor("red");
 		this.getElement().getStyle().setBorderWidth(1, Unit.PX);
 		this.getElement().getStyle().setBorderStyle(BorderStyle.DOTTED);
@@ -130,6 +150,14 @@ public class AudioSample extends HTML{
 		
 		this.setStyleName("audiosample");
 
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public SimplePanel getSoundSamplePanel() {

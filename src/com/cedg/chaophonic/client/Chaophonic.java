@@ -50,6 +50,7 @@ public class Chaophonic implements EntryPoint {
 		RootPanel.get().add(gridConstrainedDropTarget,0,400);
 		gridConstrainedDropTarget.setPixelSize(600, 120);
 		Label lDropSample = new Label("Drop your samples here :");
+		lDropSample.setStyleName("module_title");
 		RootPanel.get().add(lDropSample,0,370);
 		
 		// instantiate our drop controller
@@ -61,46 +62,44 @@ public class Chaophonic implements EntryPoint {
 		dragController2.registerDropController(gcdc);
 		
 		// Init des samples dans le sample browser
-		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3"); 
+		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
 		sd.loadSample();
-//		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3");
-//		bd.loadSample();
-//		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3");
-//		hh.loadSample();
+		final AudioSample bd = new AudioSample("bd","sounds/BD.mp3","#01D0DF");
+		bd.loadSample();
+		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3","#01D439");
+		hh.loadSample();
 
+		// TODO : automate position
+		bd.setX_orig(80);
+		bd.setY_orig(220);
+		sd.setX_orig(80);
+		sd.setY_orig(260);
+		hh.setX_orig(80);
+		hh.setY_orig(300);
 		
 		song.getBrowser().addSoundsample(sd);
-//		song.getBrowser().addSoundsample(bd);
-//		song.getBrowser().addSoundsample(hh);
-		
-		// Séquençage des samples pour le séquenceur
-//		final AudioSample bd1 = bd.getCopyOf();
-		
-//		song.addSoundsample(bd1);
+		song.getBrowser().addSoundsample(bd);
+		song.getBrowser().addSoundsample(hh);
 
-		Label lBrowser = new Label("Browser");
-		Label lBD = new Label("BD");
-		Label lSD = new Label("SD");
-		Label lHH = new Label("HH");
+		Label lBrowser = new Label("Samples :");
+		lBrowser.setStyleName("module_title");
+		Label lBD = new Label("Bass Drum");
+		Label lSD = new Label("Snare Drum");
+		Label lHH = new Label("Hi Hat");
 		
+		RootPanel.get().add(lBrowser,0,180);
+		RootPanel.get().add(lBD,0,220);
+		RootPanel.get().add(lSD,0,260);
+		RootPanel.get().add(lHH,0,300);
+
 		// Ajout des images
-		RootPanel.get().add(sd,100,200);
-		
-		RootPanel.get().add(lBrowser,0,30);
-		RootPanel.get().add(lBD,0,70);
-		RootPanel.get().add(lSD,0,130);
-		RootPanel.get().add(lHH,0,190);
-
-//		RootPanel.get().add(bd.getImg(), 40, 60);
-	//	RootPanel.get().add(sd.getImg(), 40, 120);
-//		RootPanel.get().add(hh.getImg(), 40, 180);
-
+		RootPanel.get().add(bd,bd.getX_orig(),bd.getY_orig());
+		RootPanel.get().add(sd,sd.getX_orig(),sd.getY_orig());
+		RootPanel.get().add(hh,hh.getX_orig(),hh.getY_orig());
 
 		dragController2.makeDraggable(sd);
-		
-//		dragController2.makeDraggable(bd.getImg());
-		//dragController2.makeDraggable(sd.getImg());
-//		dragController2.makeDraggable(hh.getImg());
+		dragController2.makeDraggable(bd);
+		dragController2.makeDraggable(hh);
 		
 		// Useless but might be a good example for a tête de lecture
 		// work with the customAnimation class
@@ -121,8 +120,11 @@ public class Chaophonic implements EntryPoint {
 			}
 		});
 
-		// Add it to the root panel.
 		RootPanel.get().add(b2,400,530);
+		
+		Label lClickTwice = new Label ("Please play twice : the 1st time does not work well yet");
+		lClickTwice.setPixelSize(200, 200);
+		RootPanel.get().add(lClickTwice,610,530);
 	}
 
 	// Useless but still a good example

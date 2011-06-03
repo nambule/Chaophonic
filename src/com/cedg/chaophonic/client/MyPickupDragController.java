@@ -58,7 +58,7 @@ public class MyPickupDragController extends PickupDragController{
 				this.makeDraggable(ass);
 				song.getSoundArrayHM().put(ass.getId(), ass);
 				// back to original position
-				RootPanel.get().add(w,150,200);
+				RootPanel.get().add(w,((AudioSample) w).getX_orig(),((AudioSample) w).getY_orig());
 			} else if (w instanceof AudioSampleSequenced) {
 				// séquencage de l'ASS
 				((AudioSampleSequenced) w).setStarttime(((w.getAbsoluteLeft())*10)+1);

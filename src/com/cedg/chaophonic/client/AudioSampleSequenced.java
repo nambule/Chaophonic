@@ -51,7 +51,7 @@ public class AudioSampleSequenced extends HTML{
 //		this.img.setTitle("ASS_"+cpt_id_ass);
 		//this.img.setTitle(String.valueOf(cpt_id_asc));
 		
-		this.getElement().getStyle().setBackgroundColor("red");
+		this.getElement().getStyle().setBackgroundColor(audiosample.getColor());
 		this.getElement().getStyle().setBorderColor("blue");
 		this.getElement().getStyle().setBorderWidth(1, Unit.PX);
 		this.getElement().getStyle().setBorderStyle(BorderStyle.DOTTED);
