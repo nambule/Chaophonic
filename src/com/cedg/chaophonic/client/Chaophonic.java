@@ -110,6 +110,14 @@ public class Chaophonic implements EntryPoint {
 				dragController2.registerDropController(gc);		
 			}
 		});
+	    
+	    for (int i = 0; i < 8; i++) {		    
+	    	AbsolutePanel trackGrid = new AbsolutePanel();
+		    trackGrid.setPixelSize(1, 120);
+		    trackGrid.setStyleName("trackGrid");
+		    RootPanel.get().add(trackGrid,i*80,400);
+	    }
+	    
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
 		sd.loadSample();
