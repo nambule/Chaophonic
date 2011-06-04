@@ -65,16 +65,19 @@ public class Chaophonic implements EntryPoint {
 		RootPanel.get().add(lDropSample,0,370);
 		
 		// instantiate our drop controller
-		GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 20);
-		GridConstrainedDropController gcdc2 = new Track(gridConstrainedDropTarget,50, 20);
+		final GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 20);
+		final GridConstrainedDropController gcdc2 = new Track(gridConstrainedDropTarget,20, 20);
+		final GridConstrainedDropController gcdc3 = new Track(gridConstrainedDropTarget,40, 20);		
+		//Drag handler
+		final MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
+		dragController2.setBehaviorMultipleSelection(false);
+		dragController2.registerDropController(gcdc);
 		
-
 	    // Make a new list box, adding a few items to it.
 	    final ListBox lbQuantize = new ListBox();
 	    lbQuantize.addItem("1");
 	    lbQuantize.addItem("1/2");
 	    lbQuantize.addItem("1/4");
-	    lbQuantize.addItem("1/8");
 
 	    // Make enough room for all five items (setting this value to 1 turns it
 	    // into a drop-down list).
@@ -89,19 +92,24 @@ public class Chaophonic implements EntryPoint {
 			public void onChange(ChangeEvent event) {
 				// TODO Auto-generated method stub
 				int selectedIndex = lbQuantize.getSelectedIndex();
-				System.out.println("changed:" + lbQuantize.getValue(selectedIndex));
-				
+				GridConstrainedDropController gc = null; 
+				switch (selectedIndex) {
+				case 0:
+					gc = gcdc;
+					break;
+				case 1:
+					gc = gcdc2;
+					break;
+				case 2:
+					gc = gcdc3;					
+					break;
+				default:
+					break;
+				}
+				dragController2.unregisterDropControllers(); 
+				dragController2.registerDropController(gc);		
 			}
 		});
-
-		
-		//Drag handler
-		MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
-		dragController2.setBehaviorMultipleSelection(false);
-		dragController2.registerDropController(gcdc);
-		dragController2.unregisterDropController(gcdc);
-		dragController2.registerDropController(gcdc2);
-		
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
 		sd.loadSample();
