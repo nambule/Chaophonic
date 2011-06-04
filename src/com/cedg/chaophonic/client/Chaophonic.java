@@ -2,6 +2,8 @@ package com.cedg.chaophonic.client;
 
 import com.allen_sauer.gwt.dnd.client.drop.GridConstrainedDropController;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -9,6 +11,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -61,18 +64,43 @@ public class Chaophonic implements EntryPoint {
 		lDropSample.setStyleName("module_title");
 		RootPanel.get().add(lDropSample,0,370);
 		
-//		Panel p = new HorizontalPanel();
-//		p.setPixelSize(100, 10);
-//		p.setStyleName("sequencer_rule");
-//		RootPanel.get().add(p,200,200);
-		
 		// instantiate our drop controller
 		GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 20);
+		GridConstrainedDropController gcdc2 = new Track(gridConstrainedDropTarget,50, 20);
+		
 
+	    // Make a new list box, adding a few items to it.
+	    final ListBox lbQuantize = new ListBox();
+	    lbQuantize.addItem("1");
+	    lbQuantize.addItem("1/2");
+	    lbQuantize.addItem("1/4");
+	    lbQuantize.addItem("1/8");
+
+	    // Make enough room for all five items (setting this value to 1 turns it
+	    // into a drop-down list).
+	    lbQuantize.setVisibleItemCount(1);
+
+	    // Add it to the root panel.
+	    RootPanel.get().add(lbQuantize,550,370);
+	    RootPanel.get().add(new Label("Quantize"),490,370);
+	    
+	    lbQuantize.addChangeHandler(new ChangeHandler() {
+			
+			public void onChange(ChangeEvent event) {
+				// TODO Auto-generated method stub
+				int selectedIndex = lbQuantize.getSelectedIndex();
+				System.out.println("changed:" + lbQuantize.getValue(selectedIndex));
+				
+			}
+		});
+
+		
 		//Drag handler
 		MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
 		dragController2.setBehaviorMultipleSelection(false);
 		dragController2.registerDropController(gcdc);
+		dragController2.unregisterDropController(gcdc);
+		dragController2.registerDropController(gcdc2);
 		
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
