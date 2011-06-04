@@ -1,4 +1,7 @@
-HOW TO :
+HOW TO TEST:
+- just launch war/Chaophonic.html
+
+HOW TO CONTRIBUTE:
 - install eclipse
 - install GWT 2.2 plugin for eclipse
 - create a new GWT project 
