@@ -17,23 +17,40 @@ import com.sun.j3d.audioengines.Sample;
 public class Song{
 
 	private Browser browser;
+	private Sequencer sequencer;
 
 	public Map<Integer, AudioSampleSequenced> soundSequencedArrayHM;
-	private int lengthInMs;
+	private int lengthInS;
 	private int signatureTop;
 	private int signatureBottom;
-	private int bpm;
-	// TODO : width should not be here
-	private int width;
-
-	public int getWidth() {
-		return width;
+	private int tempo;
+	private int nbOfBeats;
+	private MyPickupDragController dragController;
+	
+	public MyPickupDragController getDragController() {
+		return dragController;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
+	public void setDragController(MyPickupDragController dragController) {
+		this.dragController = dragController;
 	}
 
+	public Sequencer getSequencer() {
+		return sequencer;
+	}
+
+	public int getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(int tempo) {
+		this.tempo = tempo;
+	}
+
+	public void setSequencer(Sequencer sequencer) {
+		this.sequencer = sequencer;
+	}
+	
 	public Map<Integer, AudioSampleSequenced> getSoundArrayHM() {
 		return soundSequencedArrayHM;
 	}
@@ -42,12 +59,12 @@ public class Song{
 		this.soundSequencedArrayHM = soundArrayHM;
 	}
 
-	public int getLengthInMs() {
-		return lengthInMs;
+	public int getLengthInS() {
+		return lengthInS;
 	}
 
-	public void setLengthInMs(int lengthInMs) {
-		this.lengthInMs = lengthInMs;
+	public void setLengthInS(int lengthInMs) {
+		this.lengthInS = lengthInMs;
 	}
 
 	public int getSignatureTop() {
@@ -67,11 +84,11 @@ public class Song{
 	}
 
 	public int getBpm() {
-		return bpm;
+		return tempo;
 	}
 
 	public void setBpm(int bpm) {
-		this.bpm = bpm;
+		this.tempo = bpm;
 	}
 
 	public Browser getBrowser() {
@@ -139,10 +156,15 @@ public class Song{
 	}-*/;
 
 	public Song() {
-		super();
-		// TODO Auto-generated constructor stub
+
 		soundSequencedArrayHM = new HashMap<Integer, AudioSampleSequenced>();
 		browser = new Browser();
+		// TODO 
+		sequencer = new Sequencer(this,600,120);
+		//Drag handler
+		dragController = new MyPickupDragController(sequencer.getGridConstrainedDropTarget(), true, this);
+		dragController.setBehaviorMultipleSelection(false);
+		dragController.registerDropController(sequencer.getGcdc());
 	}
 
 	/**

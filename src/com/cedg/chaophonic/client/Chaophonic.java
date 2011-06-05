@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class Chaophonic implements EntryPoint {
 
 	private Song song;
-	
+
 	public Song getSong() {
 		return song;
 	}
@@ -43,81 +43,96 @@ public class Chaophonic implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
-		int trackWidth = 600;
-		int songLengthInMs = 5000;
+
+
+		// init the song
+		final int songLengthInS = 10;
+		final int tempo = 120;
+		final int signatureTop = 4;
+		final int signatureBottom = 4;
 		
 		// ensure the document BODY has dimensions in standards mode
 		RootPanel.get().setPixelSize(800, 600);   
-		
+
 		song = new Song();
-		song.setLengthInMs(songLengthInMs);
-		song.setWidth(trackWidth);
+		song.setLengthInS(songLengthInS);
+		song.setTempo(tempo);
+		song.setSignatureTop(signatureTop);
+		song.setSignatureBottom(signatureBottom);
+		//	song.setWidth(trackWidth);
 		song.readyToGo();
-		
+
 		// drop target
-		AbsolutePanel gridConstrainedDropTarget = new AbsolutePanel();
-		gridConstrainedDropTarget.setStyleName("sequencer");
-		RootPanel.get().add(gridConstrainedDropTarget,0,400);
-		gridConstrainedDropTarget.setPixelSize(trackWidth, 120);
-		Label lDropSample = new Label("Drop your samples here :");
-		lDropSample.setStyleName("module_title");
-		RootPanel.get().add(lDropSample,0,370);
-		
-		// instantiate our drop controller
-		final GridConstrainedDropController gcdc = new Track(gridConstrainedDropTarget,1, 20);
-		final GridConstrainedDropController gcdc2 = new Track(gridConstrainedDropTarget,20, 20);
-		final GridConstrainedDropController gcdc3 = new Track(gridConstrainedDropTarget,40, 20);		
-		//Drag handler
-		final MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
-		dragController2.setBehaviorMultipleSelection(false);
-		dragController2.registerDropController(gcdc);
-		
-	    // Make a new list box, adding a few items to it.
-	    final ListBox lbQuantize = new ListBox();
-	    lbQuantize.addItem("1");
-	    lbQuantize.addItem("1/2");
-	    lbQuantize.addItem("1/4");
+		//		AbsolutePanel gridConstrainedDropTarget = new AbsolutePanel();
+		//		gridConstrainedDropTarget.setStyleName("sequencer");
+		//		RootPanel.get().add(gridConstrainedDropTarget,0,400);
+		//		gridConstrainedDropTarget.setPixelSize(trackWidth, 120);
+		//		Label lDropSample = new Label("Drop your samples here :");
+		//		lDropSample.setStyleName("module_title");
+		//		RootPanel.get().add(lDropSample,0,370);
 
-	    // Make enough room for all five items (setting this value to 1 turns it
-	    // into a drop-down list).
-	    lbQuantize.setVisibleItemCount(1);
+		//		// instantiate our drop controller
+		//		final GridConstrainedDropController gcdc = new Sequencer(gridConstrainedDropTarget,1, 20);
+		//		final GridConstrainedDropController gcdc2 = new Sequencer(gridConstrainedDropTarget,20, 20);
+		//		final GridConstrainedDropController gcdc3 = new Sequencer(gridConstrainedDropTarget,40, 20);		
+		//		//Drag handler
+		//		final MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
+		//		dragController2.setBehaviorMultipleSelection(false);
+		//		dragController2.registerDropController(gcdc);
 
-	    // Add it to the root panel.
-	    RootPanel.get().add(lbQuantize,550,370);
-	    RootPanel.get().add(new Label("Quantize"),490,370);
-	    
-	    lbQuantize.addChangeHandler(new ChangeHandler() {
-			
-			public void onChange(ChangeEvent event) {
-				// TODO Auto-generated method stub
-				int selectedIndex = lbQuantize.getSelectedIndex();
-				GridConstrainedDropController gc = null; 
-				switch (selectedIndex) {
-				case 0:
-					gc = gcdc;
-					break;
-				case 1:
-					gc = gcdc2;
-					break;
-				case 2:
-					gc = gcdc3;					
-					break;
-				default:
-					break;
-				}
-				dragController2.unregisterDropControllers(); 
-				dragController2.registerDropController(gc);		
+		// Make a new list box, adding a few items to it.
+		final ListBox lbQuantize = new ListBox();
+		lbQuantize.addItem("1");
+		lbQuantize.addItem("1/2");
+		lbQuantize.addItem("1/4");
+
+		// Make enough room for all five items (setting this value to 1 turns it
+		// into a drop-down list).
+		lbQuantize.setVisibleItemCount(1);
+
+		// Add it to the root panel.
+		RootPanel.get().add(lbQuantize,550,370);
+		RootPanel.get().add(new Label("Quantize"),490,370);
+
+		lbQuantize.addChangeHandler(new QuantizeChangeHandler(song));
+		
+		//	    lbQuantize.addChangeHandler(new ChangeHandler() {
+		//			
+		//			public void onChange(ChangeEvent event) {
+		//				// TODO Auto-generated method stub
+		//				int selectedIndex = lbQuantize.getSelectedIndex();
+		//				GridConstrainedDropController gc = null; 
+		//				switch (selectedIndex) {
+		//				case 0:
+		//					gc = gcdc;
+		//					break;
+		//				case 1:
+		//					gc = gcdc2;
+		//					break;
+		//				case 2:
+		//					gc = gcdc3;					
+		//					break;
+		//				default:
+		//					break;
+		//				}
+		//				dragController2.unregisterDropControllers(); 
+		//				dragController2.registerDropController(gc);		
+		//			}
+		//		});
+
+		for (int i = 0; i < 8; i++) {		    
+			AbsolutePanel trackGrid = new AbsolutePanel();
+			trackGrid.setPixelSize(1, 120);
+			trackGrid.setStyleName("trackGrid");
+			RootPanel.get().add(trackGrid,i*80,400);
+			for (int j = 1; j < 4; j++) {
+				AbsolutePanel trackGrid2 = new AbsolutePanel();
+				trackGrid2.setPixelSize(1, 120);
+				trackGrid2.setStyleName("trackGrid2");
+				RootPanel.get().add(trackGrid2,i*80+j*20,400);	
 			}
-		});
-	    
-	    for (int i = 0; i < 8; i++) {		    
-	    	AbsolutePanel trackGrid = new AbsolutePanel();
-		    trackGrid.setPixelSize(1, 120);
-		    trackGrid.setStyleName("trackGrid");
-		    RootPanel.get().add(trackGrid,i*80,400);
-	    }
-	    
+		}
+
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
 		sd.loadSample();
@@ -133,7 +148,7 @@ public class Chaophonic implements EntryPoint {
 		sd.setY_orig(260);
 		hh.setX_orig(80);
 		hh.setY_orig(300);
-		
+
 		song.getBrowser().addSoundsample(sd);
 		song.getBrowser().addSoundsample(bd);
 		song.getBrowser().addSoundsample(hh);
@@ -143,7 +158,7 @@ public class Chaophonic implements EntryPoint {
 		Label lBD = new Label("Bass Drum");
 		Label lSD = new Label("Snare Drum");
 		Label lHH = new Label("Hi Hat");
-		
+
 		RootPanel.get().add(lBrowser,0,180);
 		RootPanel.get().add(lBD,0,220);
 		RootPanel.get().add(lSD,0,260);
@@ -154,10 +169,10 @@ public class Chaophonic implements EntryPoint {
 		RootPanel.get().add(sd,sd.getX_orig(),sd.getY_orig());
 		RootPanel.get().add(hh,hh.getX_orig(),hh.getY_orig());
 
-		dragController2.makeDraggable(sd);
-		dragController2.makeDraggable(bd);
-		dragController2.makeDraggable(hh);
-		
+		song.getDragController().makeDraggable(sd);
+		song.getDragController().makeDraggable(bd);
+		song.getDragController().makeDraggable(hh);
+
 		// Useless but might be a good example for a tte de lecture
 		// work with the customAnimation class
 		// CustomAnimation animation = new CustomAnimation(img.getElement());
@@ -167,7 +182,7 @@ public class Chaophonic implements EntryPoint {
 		b2.setPixelSize(200, 40);
 		b2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
+
 				// example of animating an object
 				//movePic(img2);
 				System.out.println("Song play");
@@ -178,16 +193,16 @@ public class Chaophonic implements EntryPoint {
 		});
 
 		RootPanel.get().add(b2,400,530);
-		
+
 		Label lClickTwice = new Label ("Please play twice : the 1st time does not work well yet");
 		lClickTwice.setPixelSize(200, 200);
 		RootPanel.get().add(lClickTwice,610,530);
 	}
 
 	// Useless but still a good example
-	private void movePic(Image img){
-		CustomAnimation animation2 = new CustomAnimation(img.getElement());
-		animation2.scrollTo(500, 0, 3000);	
-	}
+	//	private void movePic(Image img){
+	//		CustomAnimation animation2 = new CustomAnimation(img.getElement());
+	//		animation2.scrollTo(500, 0, 3000);	
+	//	}
 
 }
