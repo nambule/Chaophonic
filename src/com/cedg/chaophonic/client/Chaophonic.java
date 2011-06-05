@@ -83,6 +83,11 @@ public class Chaophonic implements EntryPoint {
 
 		lbQuantize.addChangeHandler(new QuantizeChangeHandler(song));
 
+		Label lSignature = new Label ("Signature : " + song.getSignatureTop()+"/"+song.getSignatureBottom());
+		RootPanel.get().add(lSignature,0,550);
+		Label lTempo = new Label ("Tempo : " + song.getTempo());
+		RootPanel.get().add(lTempo,0,570);
+		
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 
 		sd.loadSample();
