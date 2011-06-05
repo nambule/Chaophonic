@@ -18,10 +18,10 @@ public class MyPickupDragController extends PickupDragController{
 
 	private Song song;
 	
-	public MyPickupDragController(AbsolutePanel boundaryPanel,
-			boolean allowDroppingOnBoundaryPanel) {
-		super(boundaryPanel, allowDroppingOnBoundaryPanel);
-	}
+//	public MyPickupDragController(AbsolutePanel boundaryPanel,
+//			boolean allowDroppingOnBoundaryPanel) {
+//		super(boundaryPanel, allowDroppingOnBoundaryPanel);
+//	}
 	
 	public MyPickupDragController(AbsolutePanel boundaryPanel,
 			boolean allowDroppingOnBoundaryPanel, Song s) {

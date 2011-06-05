@@ -23,14 +23,6 @@ public class Chaophonic implements EntryPoint {
 
 	private Song song;
 
-	public Song getSong() {
-		return song;
-	}
-
-	public void setSong(Song song) {
-		this.song = song;
-	}
-
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -54,38 +46,33 @@ public class Chaophonic implements EntryPoint {
 		// ensure the document BODY has dimensions in standards mode
 		RootPanel.get().setPixelSize(800, 600);   
 
-		song = new Song();
-		song.setLengthInS(songLengthInS);
-		song.setTempo(tempo);
-		song.setSignatureTop(signatureTop);
-		song.setSignatureBottom(signatureBottom);
+		song = new Song(tempo,songLengthInS,signatureTop,signatureBottom);
+		
+//		song.setLengthInS(songLengthInS);
+//		song.setTempo(tempo);
+//		song.setSignatureTop(signatureTop);
+//		song.setSignatureBottom(signatureBottom);
 		//	song.setWidth(trackWidth);
 		song.readyToGo();
 
-		// drop target
-		//		AbsolutePanel gridConstrainedDropTarget = new AbsolutePanel();
-		//		gridConstrainedDropTarget.setStyleName("sequencer");
-		//		RootPanel.get().add(gridConstrainedDropTarget,0,400);
-		//		gridConstrainedDropTarget.setPixelSize(trackWidth, 120);
-		//		Label lDropSample = new Label("Drop your samples here :");
-		//		lDropSample.setStyleName("module_title");
-		//		RootPanel.get().add(lDropSample,0,370);
-
-		//		// instantiate our drop controller
-		//		final GridConstrainedDropController gcdc = new Sequencer(gridConstrainedDropTarget,1, 20);
-		//		final GridConstrainedDropController gcdc2 = new Sequencer(gridConstrainedDropTarget,20, 20);
-		//		final GridConstrainedDropController gcdc3 = new Sequencer(gridConstrainedDropTarget,40, 20);		
-		//		//Drag handler
-		//		final MyPickupDragController dragController2 = new MyPickupDragController(gridConstrainedDropTarget, true, song);
-		//		dragController2.setBehaviorMultipleSelection(false);
-		//		dragController2.registerDropController(gcdc);
-
+		Sequencer seq = new Sequencer(song);
+		song.setSequencer(seq);
+		seq.Display(600, 120);
+		
+		MyPickupDragController dragController = new MyPickupDragController(seq.getGridConstrainedDropTarget(), true, song);
+		song.setDragController(dragController);
+		dragController.setBehaviorMultipleSelection(false);
+		dragController.registerDropController(seq.getGcdcNone());
+		
 		// Make a new list box, adding a few items to it.
 		final ListBox lbQuantize = new ListBox();
+		lbQuantize.addItem("None");
 		lbQuantize.addItem("1");
 		lbQuantize.addItem("1/2");
 		lbQuantize.addItem("1/4");
-
+		lbQuantize.addItem("1/8");
+		lbQuantize.addItem("1/16");
+		
 		// Make enough room for all five items (setting this value to 1 turns it
 		// into a drop-down list).
 		lbQuantize.setVisibleItemCount(1);
@@ -95,43 +82,6 @@ public class Chaophonic implements EntryPoint {
 		RootPanel.get().add(new Label("Quantize"),490,370);
 
 		lbQuantize.addChangeHandler(new QuantizeChangeHandler(song));
-		
-		//	    lbQuantize.addChangeHandler(new ChangeHandler() {
-		//			
-		//			public void onChange(ChangeEvent event) {
-		//				// TODO Auto-generated method stub
-		//				int selectedIndex = lbQuantize.getSelectedIndex();
-		//				GridConstrainedDropController gc = null; 
-		//				switch (selectedIndex) {
-		//				case 0:
-		//					gc = gcdc;
-		//					break;
-		//				case 1:
-		//					gc = gcdc2;
-		//					break;
-		//				case 2:
-		//					gc = gcdc3;					
-		//					break;
-		//				default:
-		//					break;
-		//				}
-		//				dragController2.unregisterDropControllers(); 
-		//				dragController2.registerDropController(gc);		
-		//			}
-		//		});
-
-		for (int i = 0; i < 8; i++) {		    
-			AbsolutePanel trackGrid = new AbsolutePanel();
-			trackGrid.setPixelSize(1, 120);
-			trackGrid.setStyleName("trackGrid");
-			RootPanel.get().add(trackGrid,i*80,400);
-			for (int j = 1; j < 4; j++) {
-				AbsolutePanel trackGrid2 = new AbsolutePanel();
-				trackGrid2.setPixelSize(1, 120);
-				trackGrid2.setStyleName("trackGrid2");
-				RootPanel.get().add(trackGrid2,i*80+j*20,400);	
-			}
-		}
 
 		// Init des samples dans le sample browser
 		final AudioSample sd = new AudioSample("sd","sounds/SD.mp3","#FE0101"); 

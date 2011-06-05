@@ -134,37 +134,30 @@ public class Song{
 		
 		    }    
 		}
-//		for (Iterator<AudioSample> iterator = soundArrayHM.values().iterator() ; iterator.hasNext() ;){
-//		    AudioSample s = iterator.next();
-//		    if (s.getStarttime()!=0){
-//			    s.initTimer();
-//			    s.getTimer().schedule(s.getStarttime());	    
-//		
-//		    }    
-//		}
 	}
-
-//	public void sequenceSample(Soundsample s, Integer startTime){
-//		final Soundsample s2 = s.getCopyOf();
-//		s2.setStarttime(startTime);
-//		this.addSoundsample(s2);
-//	}
 
 	public native void readyToGo()
 	/*-{
 		$wnd.alert("Ready to go ?");
 	}-*/;
 
-	public Song() {
+	public Song(int tempo, int songLengthInS, int signatureTop, int signatureBottom) {
 
 		soundSequencedArrayHM = new HashMap<Integer, AudioSampleSequenced>();
 		browser = new Browser();
+		this.tempo = tempo;
+		this.lengthInS = songLengthInS;
+		this.signatureTop = signatureTop;
+		this.signatureBottom = signatureBottom;
+		
 		// TODO 
-		sequencer = new Sequencer(this,600,120);
+		//sequencer = new Sequencer(this,600,120);
+		//sequencer = new Sequencer(this);
+		//sequencer.Display(600, 120);
 		//Drag handler
-		dragController = new MyPickupDragController(sequencer.getGridConstrainedDropTarget(), true, this);
-		dragController.setBehaviorMultipleSelection(false);
-		dragController.registerDropController(sequencer.getGcdc());
+//		dragController = new MyPickupDragController(sequencer.getGridConstrainedDropTarget(), true, this);
+//		dragController.setBehaviorMultipleSelection(false);
+//		dragController.registerDropController(sequencer.getGcdc());
 	}
 
 	/**
