@@ -95,7 +95,9 @@ public class Chaophonic implements EntryPoint {
 		bd.loadSample();
 		final AudioSample hh = new AudioSample("hh","sounds/HH.mp3","#FEED00");
 		hh.loadSample();
-
+		final AudioSample p0 = new AudioSample("p0","sounds/p0.mp3","#8340A4");
+		p0.loadSample();
+		
 		// TODO : automate position
 		bd.setX_orig(80);
 		bd.setY_orig(220);
@@ -103,31 +105,38 @@ public class Chaophonic implements EntryPoint {
 		sd.setY_orig(260);
 		hh.setX_orig(80);
 		hh.setY_orig(300);
-
+		p0.setX_orig(80);
+		p0.setY_orig(340);
+		
 		song.getBrowser().addSoundsample(sd);
 		song.getBrowser().addSoundsample(bd);
 		song.getBrowser().addSoundsample(hh);
-
+		song.getBrowser().addSoundsample(p0);
+		
 		Label lBrowser = new Label("Samples :");
 		lBrowser.setStyleName("module_title");
 		Label lBD = new Label("Bass Drum");
 		Label lSD = new Label("Snare Drum");
 		Label lHH = new Label("Hi Hat");
-
+		Label lp0 = new Label("Piano");
+		
 		RootPanel.get().add(lBrowser,0,180);
 		RootPanel.get().add(lBD,0,220);
 		RootPanel.get().add(lSD,0,260);
 		RootPanel.get().add(lHH,0,300);
-
+		RootPanel.get().add(lp0,0,340);
+		
 		// Ajout des images
 		RootPanel.get().add(bd,bd.getX_orig(),bd.getY_orig());
 		RootPanel.get().add(sd,sd.getX_orig(),sd.getY_orig());
 		RootPanel.get().add(hh,hh.getX_orig(),hh.getY_orig());
-
+		RootPanel.get().add(p0,p0.getX_orig(),p0.getY_orig());
+		
 		song.getDragController().makeDraggable(sd);
 		song.getDragController().makeDraggable(bd);
 		song.getDragController().makeDraggable(hh);
-
+		song.getDragController().makeDraggable(p0);
+		
 		// Useless but might be a good example for a tête de lecture
 		// work with the customAnimation class
 		// CustomAnimation animation = new CustomAnimation(img.getElement());

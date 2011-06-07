@@ -186,9 +186,10 @@ public class AudioSample extends HTML{
 		this.@com.cedg.chaophonic.client.AudioSample::soundObject = $wnd.soundManager.createSound(
 		{
 			id : label,
-			url : filename
+			url : filename		
 		});		
 		this.@com.cedg.chaophonic.client.AudioSample::soundObject.load();
+
 	}-*/;
 
 
