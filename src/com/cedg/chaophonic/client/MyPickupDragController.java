@@ -50,12 +50,17 @@ public class MyPickupDragController extends PickupDragController{
 			String objectTitle = w.getElement().getTitle();
 			
 			int calculatePosition = (w.getAbsoluteLeft()*song.getLengthInS()*1000/song.getSequencer().getWidth())+1;
-			System.out.println("calculatePosition="+calculatePosition+" "+"song.getSequencer().getWidth()="+song.getSequencer().getWidth());
+			//System.out.println("calculatePosition="+calculatePosition+" "+"song.getSequencer().getWidth()="+song.getSequencer().getWidth());
 			// si c'est un AS alors on créé un ASS, sinon c'est un déplacement d'un ASS existant
 			if (w instanceof AudioSample){
 				// création d'un nouvel ASS
+				
+				System.out.println("time="+((AudioSample) w).getSampleDuration());
+				
 				AudioSampleSequenced ass = new AudioSampleSequenced((AudioSample) w);
 				ass.setStarttime(calculatePosition);
+				ass.setWidth(song);
+				System.out.println("sampleduration "+((AudioSample) w).getSampleDuration());
 				RootPanel.get().add(ass,w.getAbsoluteLeft(),w.getAbsoluteTop());
 				this.makeDraggable(ass);
 				song.getSoundArrayHM().put(ass.getId(), ass);

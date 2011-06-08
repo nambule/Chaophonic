@@ -60,6 +60,14 @@ public class AudioSample extends HTML{
 		this.y_orig = y_orig;
 	}
 
+	public int getLengthInMs() {
+		return lengthInMs;
+	}
+
+	public void setLengthInMs(int lengthInMs) {
+		this.lengthInMs = lengthInMs;
+	}
+
 	public Image getImg() {
 		return img;
 	}
@@ -106,14 +114,6 @@ public class AudioSample extends HTML{
 
 	public void setFilename(String filename) {
 		this.filename = filename;
-	}
-
-	public int getLength() {
-		return lengthInMs;
-	}
-
-	public void setLength(int length) {
-		this.lengthInMs = length;
 	}
 
 //	public int getStarttime() {
@@ -173,23 +173,27 @@ public class AudioSample extends HTML{
 		this.id = id;
 		this.label = label;
 		this.filename = filename;
-		this.lengthInMs = length;
+		//this.lengthInMs = length;
 	}
 
-	
+	// TODO : PB
 	public native void loadSample()
 	/*-{
 
 		var label = this.@com.cedg.chaophonic.client.AudioSample::label;
 		var filename = this.@com.cedg.chaophonic.client.AudioSample::filename;
-
+		var durationInMs;
 		this.@com.cedg.chaophonic.client.AudioSample::soundObject = $wnd.soundManager.createSound(
 		{
 			id : label,
-			url : filename		
+			url : filename,
+			//onload : function() {
+				//durationInMs = parseInt(this.duration);
+				//this.@com.cedg.chaophonic.client.AudioSample::lengthInMs = durationInMs+"";
+				//$wnd.alert("durationInMs:"+durationInMs+ " " + this.@com.cedg.chaophonic.client.AudioSample::lengthInMs+"");				
+			//} // Attention pas de virgule ici 		
 		});		
 		this.@com.cedg.chaophonic.client.AudioSample::soundObject.load();
-
 	}-*/;
 
 
@@ -199,6 +203,11 @@ public class AudioSample extends HTML{
 		this.@com.cedg.chaophonic.client.AudioSample::soundObject.play();	
 	}-*/;
 
+	public native int getSampleDuration()
+	/*-{
+		return this.@com.cedg.chaophonic.client.AudioSample::soundObject.duration;	
+	}-*/;
+	
 	public String toString(){
 		return "AS name:"+this.filename + " id:" +this.id + " lab:" + this.label + " len:" + this.lengthInMs + " imgTitle:"+img.getTitle()+"\n";
 	}

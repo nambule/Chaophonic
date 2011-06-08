@@ -33,7 +33,14 @@ public class AudioSampleSequenced extends HTML{
 		this.id = id;
 	}
 
-
+	public int calculateWidth(Song s){
+		return (audiosample.getSampleDuration()*s.getSequencer().getWidth())/(s.getLengthInS()*1000);
+	}
+	
+	// TODO : modifier le height en dur
+	public void setWidth(Song s){
+		this.setPixelSize(calculateWidth(s), 20);
+	}
 	
 	public AudioSampleSequenced(AudioSample audiosample) {
 		//super();
