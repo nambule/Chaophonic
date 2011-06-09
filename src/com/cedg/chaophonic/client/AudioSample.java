@@ -143,7 +143,7 @@ public class AudioSample extends HTML{
 		
 		//this.setElement(Document.get().createDivElement());
 		this.getElement().getStyle().setBackgroundColor(color);
-		this.getElement().getStyle().setBorderColor("red");
+		this.getElement().getStyle().setBorderColor("black");
 		this.getElement().getStyle().setBorderWidth(1, Unit.PX);
 		this.getElement().getStyle().setBorderStyle(BorderStyle.DOTTED);
 		this.getElement().setInnerText(label);
