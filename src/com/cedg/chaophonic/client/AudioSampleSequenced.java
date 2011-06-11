@@ -65,7 +65,7 @@ public class AudioSampleSequenced extends HTML{
 //		this.getElement().getStyle().setHeight(20, Unit.PX);
 		this.getElement().setInnerText(audiosample.getText());
 		
-		this.setStyleName("audiosample");
+		this.setStyleName("audiosamplesequenced");
 		
 	}
 	
